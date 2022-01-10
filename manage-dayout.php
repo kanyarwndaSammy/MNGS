@@ -1,0 +1,201 @@
+<?php include('includes/config.php');?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>MNGS | System</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
+        <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
+        <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
+        <link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen" >
+        <link rel="stylesheet" href="css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
+        <link rel="stylesheet" type="text/css" href="js/DataTables/datatables.min.css"/>
+        <link rel="stylesheet" href="css/main.css" media="screen" >
+        <script src="js/modernizr/modernizr.min.js"></script>
+          <style>
+        .errorWrap {
+    padding: 10px;
+    margin: 0 0 20px 0;
+    background: #fff;
+    border-left: 4px solid #dd3d36;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+.succWrap{
+    padding: 10px;
+    margin: 0 0 20px 0;
+    background: #fff;
+    border-left: 4px solid #5cb85c;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+        </style>
+    </head>
+    <body >
+
+            <!-- ========== TOP NAVBAR ========== -->
+   <?php include('includes/topbar.php');?>
+            <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
+            <div class="content-wrapper">
+                <div class="content-container">
+
+                    <!-- ========== LEFT SIDEBAR ========== -->
+                   <?php include('includes/leftbar.php');?>
+                    <div class="main-page">
+                        <div class="container-fluid">
+                            <div class="row page-title-div">
+                                <div class="col-md-6">
+                                    <h2 class="title">Manage Day Work Out </h2>
+
+                                </div>
+
+                                <!-- /.col-md-6 text-right -->
+                            </div>
+                            <!-- /.row -->
+                            <div class="row breadcrumb-div">
+                                <div class="col-md-6">
+                                    <ul class="breadcrumb">
+            							<li><a href="dashboard.php"><i class="fa fa-home"></i> Admin|Control Panel</a></li>
+            							<li class="active">Day</li><li>Work</li><li>Out</li>
+            						</ul>
+                                </div>
+
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container-fluid -->
+
+                        <section class="section">
+                            <div class="container-fluid">
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12" >
+
+                                        <div class="panel">
+                                            <div class="panel-heading">
+
+                                            <div class="panel-body p-6" style="font-family:auto;">
+
+                                                <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%"  >
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Employee Name</th>
+                                                            <th>Reason</th>
+                                                            <th>Quantity</th>
+
+                                                       
+                                                            <th>Price</th>
+                                                            <th>Date</th>
+                                                            <th>Total price</th>
+                                                            <th>Operation</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+  <?php
+$res =$con->query( "select * from day_out") or die(mysqli_error());
+$no=1;
+while ($row = mysqli_fetch_array($res)) {
+echo "<tr>";
+echo "<td>";
+echo $no;
+echo "</td>";
+echo "<td>";
+echo $row["employeName"];
+echo "</td>";
+echo "<td>";
+echo $row["reason"];
+echo "</td>";
+
+echo "<td>";
+echo $row["quantity"];
+echo "</td>";
+echo "<td>";
+echo $row["price"];
+echo "</td>";
+echo "<td>";
+echo $row["date"];
+echo "</td>";
+echo "<td>";
+echo $row["total_price"];
+echo "</td>";
+?>
+<td><a href="?day_id=<?php echo $row['day_id']; ?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+<td><a href="?day_id=<?php echo $row['day_id']; ?>"><i class="fa fa-trash"></i></a>
+
+</td></tr>
+<?php $no++;}?>
+                                                    </tbody>
+                                                </table>
+
+
+                                                <!-- /.col-md-12 -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.col-md-6 -->
+
+
+                                                </div>
+                                                <!-- /.col-md-12 -->
+                                            </div>
+                                        </div>
+                                        <!-- /.panel -->
+                                    </div>
+                                    <!-- /.col-md-6 -->
+
+                                </div>
+                                <!-- /.row -->
+
+                            </div>
+                            <!-- /.container-fluid -->
+                        </section>
+                        <!-- /.section -->
+
+                    </div>
+                    <!-- /.main-page -->
+
+
+
+                </div>
+                <!-- /.content-container -->
+            </div>
+            <!-- /.content-wrapper -->
+
+        </div>
+        <!-- /.main-wrapper -->
+
+        <!-- ========== COMMON JS FILES ========== -->
+        <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <script src="js/bootstrap/bootstrap.min.js"></script>
+        <script src="js/pace/pace.min.js"></script>
+        <script src="js/lobipanel/lobipanel.min.js"></script>
+        <script src="js/iscroll/iscroll.js"></script>
+
+        <!-- ========== PAGE JS FILES ========== -->
+        <script src="js/prism/prism.js"></script>
+        <script src="js/DataTables/datatables.min.js"></script>
+
+        <!-- ========== THEME JS ========== -->
+        <script src="js/main.js"></script>
+        <script>
+            $(function($) {
+                $('#example').DataTable();
+
+                $('#example2').DataTable( {
+                    "scrollY":        "100%",
+                    "scrollCollapse": true,
+                    "paging":         false,
+
+                } );
+
+                $('#example3').DataTable();
+            });
+        </script>
+    </body>
+</html>
